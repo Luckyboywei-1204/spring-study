@@ -20,6 +20,8 @@
     <bean id="itemDao" class="com.wang.dao.JpaItemDao">
         <!-- additional collaborators and configuration for this bean go here -->
     </bean>
+    <!--xml导入-->
+    <import resource="message.xml"/>
 
     <!-- more bean definitions for services go here -->
 

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!---->
 <configuration status="info">
     <Properties>
         <!-- 声明日志文件存储的目录 -->
         <!--<Property name="LOG_HOME">/logs</Property>-->
         <!--<Property name="APP_NAME">log</Property>-->
-        <Property name="LOG_PATTERN"
-                  value="%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread][%class{36}:%line] - %msg%n"></Property>
+        <!--log4j2.x去掉了value字段-->
+        <!--<Property name="LOG_PATTERN"-->
+        <!--          value="%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread][%class{36}:%line] - %msg%n"></Property>-->
     </Properties>
     <Appenders>
         <!--输出控制台的配置-->
@@ -14,7 +15,7 @@
             <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
             <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
             <!-- 输出日志的格式-->
-            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
 
         <!--输出日志到文件的配置，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面-->
