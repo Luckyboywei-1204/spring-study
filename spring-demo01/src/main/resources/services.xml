@@ -11,6 +11,8 @@
         <property name="itemDao" ref="itemDao"/>
         <!-- additional collaborators and configuration for this bean go here -->
     </bean>
+    <alias name="petStore" alias="petStoreService1"/>
+    <alias name="petStore" alias="petStoreService2"/>
 
     <bean id="accountDao"
           class="com.wang.dao.JpaAccountDao">
