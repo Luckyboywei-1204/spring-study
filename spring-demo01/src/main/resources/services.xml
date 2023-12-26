@@ -22,6 +22,23 @@
     <bean id="itemDao" class="com.wang.dao.JpaItemDao">
         <!-- additional collaborators and configuration for this bean go here -->
     </bean>
+
+    <!--静态工厂实例化bean-->
+    <bean id="clientService"
+          class="com.wang.service.ClientService"
+          factory-method="createInstance"/>
+
+    <!-- the factory bean, which contains a method called createInstance() -->
+    <bean id="serviceLocator" class="com.wang.service.DefaultServiceLocator">
+        <!-- inject any dependencies required by this locator bean -->
+    </bean>
+
+    <!--factory-bean指定当前容器中包含创建该bean方法的bean的名称  -->
+    <bean id="clientService01"
+          factory-bean="serviceLocator"
+          factory-method="createClientServiceInstance"/>
+
+
     <!--xml导入-->
     <import resource="message.xml"/>
 

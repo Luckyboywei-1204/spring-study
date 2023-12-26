@@ -1,5 +1,7 @@
 package com.wang.main;
 
+import com.wang.service.ClientService;
+import com.wang.service.DefaultServiceLocator;
 import com.wang.service.PetStoreServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,12 +21,12 @@ public class MainTest01 {
     private static final Logger LOGGER = LoggerFactory.getLogger(MainTest01.class);
 
     public static void main(String[] args) {
-        test03();
+        test05();
     }
 
     public static void test01() {
         ApplicationContext context = new ClassPathXmlApplicationContext("services.xml");
-        LOGGER.info("MainTest01.save start");
+        LOGGER.info("test01 start");
         context.getBean(PetStoreServiceImpl.class).save();
     }
 
@@ -37,10 +39,31 @@ public class MainTest01 {
         context.getBean(PetStoreServiceImpl.class).save();
     }
 
+    /**
+     * bean的别名
+     */
     public static void test03() {
         ApplicationContext context = new ClassPathXmlApplicationContext("services.xml");
-        LOGGER.info("MainTest01.save start");
+        LOGGER.info("test03 start");
         // context.getBean("petStoreService1", PetStoreServiceImpl.class).save();
         context.getBean("petStoreService2", PetStoreServiceImpl.class).save();
+    }
+
+    /**
+     * 静态工厂实例化bean
+     */
+    public static void test04() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("services.xml");
+        LOGGER.info("test04 start");
+        context.getBean(ClientService.class).invoke();
+    }
+
+    /**
+     * 实例工厂实例化bean
+     */
+    public static void test05() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("services.xml");
+        LOGGER.info("test04 start");
+        context.getBean(DefaultServiceLocator.class).defaultServiceLocatorInvoke();
     }
 }
