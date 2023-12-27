@@ -1,5 +1,7 @@
 package com.wang.main;
 
+import com.wang.config.DataSource;
+import com.wang.config.ParentDataSource;
 import com.wang.service.*;
 import com.wang.service.bean.BeanOne;
 import com.wang.service.bean.ExampleBean;
@@ -20,9 +22,6 @@ public class MainTest01 {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MainTest01.class);
 
-    public static void main(String[] args) {
-        test09();
-    }
 
     public static void test01() {
         ApplicationContext context = new ClassPathXmlApplicationContext("services.xml");
@@ -123,4 +122,39 @@ public class MainTest01 {
         context.getBean(CyclicA.class).cyclicA();
         context.getBean(CyclicB.class).cyclicB();
     }
+
+    /**
+     * 字面值属性设置
+     */
+    public static void test10() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("services.xml");
+        LOGGER.info("test10 start");
+        DataSource bean = context.getBean(DataSource.class);
+        LOGGER.info(bean.toString());
+    }
+
+    /**
+     * <bean id="sonDataSource" class="com.wang.config.SonDataSource">
+     *         <constructor-arg name="dataSource">
+     *             <ref parent="myDataSource"/>
+     *         </constructor-arg>
+     *     </bean>
+     * spring子容器引用父容器的bean
+     * 例如springmvc bean属性引用spring容器bean，
+     */
+
+    /**
+     * 内部bean
+     */
+    public static void test11() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("services.xml");
+        LOGGER.info("test11 start");
+        ParentDataSource bean = context.getBean(ParentDataSource.class);
+        bean.parentDataSource();
+    }
+
+    public static void main(String[] args) {
+        test11();
+    }
+
 }
