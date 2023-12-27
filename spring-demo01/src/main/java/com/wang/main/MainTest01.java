@@ -3,6 +3,8 @@ package com.wang.main;
 import com.wang.service.ClientService;
 import com.wang.service.DefaultServiceLocator;
 import com.wang.service.PetStoreServiceImpl;
+import com.wang.service.bean.BeanOne;
+import com.wang.service.bean.ExampleBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
@@ -21,7 +23,7 @@ public class MainTest01 {
     private static final Logger LOGGER = LoggerFactory.getLogger(MainTest01.class);
 
     public static void main(String[] args) {
-        test05();
+        test07();
     }
 
     public static void test01() {
@@ -65,5 +67,25 @@ public class MainTest01 {
         ApplicationContext context = new ClassPathXmlApplicationContext("services.xml");
         LOGGER.info("test04 start");
         context.getBean(DefaultServiceLocator.class).defaultServiceLocatorInvoke();
+    }
+
+    /**
+     * 基于构造器的依赖注入
+     */
+    public static void test06() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("services.xml");
+        LOGGER.info("test06 start");
+        context.getBean(BeanOne.class).beanOne();
+    }
+
+    /**
+     * 构造参数已知情况下基于构造器的依赖注入
+     */
+    public static void test07() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("services.xml");
+        LOGGER.info("test07 start");
+        ExampleBean bean = context.getBean(ExampleBean.class);
+        LOGGER.info("answers:{}",bean.getUltimateAnswer());
+        LOGGER.info("years:{}", bean.getYears());
     }
 }
