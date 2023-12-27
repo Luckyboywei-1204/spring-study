@@ -1,8 +1,6 @@
 package com.wang.main;
 
-import com.wang.service.ClientService;
-import com.wang.service.DefaultServiceLocator;
-import com.wang.service.PetStoreServiceImpl;
+import com.wang.service.*;
 import com.wang.service.bean.BeanOne;
 import com.wang.service.bean.ExampleBean;
 import org.slf4j.Logger;
@@ -23,7 +21,7 @@ public class MainTest01 {
     private static final Logger LOGGER = LoggerFactory.getLogger(MainTest01.class);
 
     public static void main(String[] args) {
-        test07();
+        test09();
     }
 
     public static void test01() {
@@ -87,5 +85,42 @@ public class MainTest01 {
         ExampleBean bean = context.getBean(ExampleBean.class);
         LOGGER.info("answers:{}",bean.getUltimateAnswer());
         LOGGER.info("years:{}", bean.getYears());
+    }
+
+    /**
+     * 基于set的依赖注入
+     * <p>
+     *     依赖解析过程：
+     *     1.ApplicationContext是描述所有bean配置元数据和初始化
+     *     2.对于每个bean，所依赖的bean以属性、构造函数参数、静态工厂方法参数表达的；创建bean时，这些依赖提供给bean
+     *     3.每个属性和参数都得设计值的实际定义，或者容器中其他bean的引用
+     *
+     *     容器创建时，spring会验证每个bean的配置。在实际创建bean时bean的属性不会被设置；
+     *     容器创建时，具有单例属性的bean会默认被创建，否则是在请求时才会创建；
+     *     创建bean时，可能会创建bean图（bean的依赖关系）
+     *
+     *
+     * </p>
+     */
+    public static void test08() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("services.xml");
+        LOGGER.info("test08 start");
+        context.getBean(SimpleMovieLister.class).simpleMovieLister();
+    }
+
+    /**
+     * 测试循环依赖
+     * <p>
+     *     循环依赖：
+     *     类A通过构造函数注入需要类B的一个实例，类B通过构造函数注入需要类A的一个实例。
+     *     会抛BeanCurrentlyInCreationException异常
+     *     解决：通过set注入
+     * </p>
+     */
+    public static void test09() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("services.xml");
+        LOGGER.info("test09 start");
+        context.getBean(CyclicA.class).cyclicA();
+        context.getBean(CyclicB.class).cyclicB();
     }
 }

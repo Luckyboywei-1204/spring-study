@@ -60,8 +60,28 @@
     <!--    <constructor-arg index="1" value="42"/>-->
     <!--</bean>-->
 
+    <!--基于set注入-->
+    <bean id="movieFinder" class="com.wang.service.MovieFinder"/>
+    <bean id="simpleMovieLister" class="com.wang.service.SimpleMovieLister">
+        <property name="movieFinder" ref="movieFinder"/>
+    </bean>
 
+    <!--循环依赖-->
+    <!--<bean id="cyclicA" class="com.wang.service.CyclicA">-->
+    <!--    <constructor-arg ref="cyclicB"/>-->
+    <!--</bean>-->
 
+    <!--<bean id="cyclicB" class="com.wang.service.CyclicB">-->
+    <!--    <constructor-arg ref="cyclicA"/>-->
+    <!--</bean>-->
+    <!--set注入解决循环依赖-->
+    <bean id="cyclicA" class="com.wang.service.CyclicA">
+        <property name="cyclicB" ref="cyclicB"/>
+    </bean>
+
+    <bean id="cyclicB" class="com.wang.service.CyclicB">
+        <property name="cyclicA" ref="cyclicA"/>
+    </bean>
 
     <!--xml导入-->
     <import resource="message.xml"/>
