@@ -6,6 +6,7 @@ import com.wang.dao.StoreDao;
 import com.wang.service.*;
 import com.wang.service.bean.BeanOne;
 import com.wang.service.bean.ExampleBean;
+import com.wang.service.bean.ExampleBean01;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
@@ -154,15 +155,31 @@ public class MainTest01 {
         bean.parentDataSource();
     }
 
+    /**
+     * LIST
+     * MAP
+     * SET
+     * PROPERTIES注入
+     */
     public static void test12() {
         ApplicationContext context = new ClassPathXmlApplicationContext("services.xml");
-        LOGGER.info("test11 start");
+        LOGGER.info("test12 start");
         StoreDao bean = context.getBean(StoreDao.class);
         bean.print();
     }
 
+    /**
+     * Null and Empty String Values
+     */
+    public static void test13() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("services.xml");
+        LOGGER.info("test13 start");
+        ExampleBean01 bean = context.getBean(ExampleBean01.class);
+        bean.isNull();
+    }
+
     public static void main(String[] args) {
-        test12();
+        test13();
     }
 
 }

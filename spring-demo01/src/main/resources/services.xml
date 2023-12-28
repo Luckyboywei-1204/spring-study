@@ -155,6 +155,13 @@
         </property>
     </bean>
 
+    <!--null-->
+    <bean id="exampleBean1" class="com.wang.service.bean.ExampleBean01">
+        <property name="email">
+            <null/>
+        </property>
+        <!--<property name="email" value=""/>-->
+    </bean>
 
     <!--xml导入-->
     <import resource="message.xml"/>
