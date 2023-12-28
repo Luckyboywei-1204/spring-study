@@ -42,6 +42,22 @@ public class DataSource {
         return this;
     }
 
+    public String getDriverClassName() {
+        return driverClassName;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     @Override
     public String toString() {
         return "DataSource{" +

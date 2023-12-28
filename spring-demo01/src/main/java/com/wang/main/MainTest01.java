@@ -2,6 +2,7 @@ package com.wang.main;
 
 import com.wang.config.DataSource;
 import com.wang.config.ParentDataSource;
+import com.wang.dao.StoreDao;
 import com.wang.service.*;
 import com.wang.service.bean.BeanOne;
 import com.wang.service.bean.ExampleBean;
@@ -153,8 +154,15 @@ public class MainTest01 {
         bean.parentDataSource();
     }
 
+    public static void test12() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("services.xml");
+        LOGGER.info("test11 start");
+        StoreDao bean = context.getBean(StoreDao.class);
+        bean.print();
+    }
+
     public static void main(String[] args) {
-        test11();
+        test12();
     }
 
 }
