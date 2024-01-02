@@ -7,6 +7,7 @@ import com.wang.service.*;
 import com.wang.service.bean.BeanOne;
 import com.wang.service.bean.ExampleBean;
 import com.wang.service.bean.ExampleBean01;
+import com.wang.service.bean.ExampleBean02;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
@@ -178,8 +179,15 @@ public class MainTest01 {
         bean.isNull();
     }
 
+    public static void test14() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("services.xml");
+        LOGGER.info("test14 start");
+        ExampleBean02 bean = context.getBean(ExampleBean02.class);
+        bean.exampleBean02();
+    }
+
     public static void main(String[] args) {
-        test13();
+        test14();
     }
 
 }
