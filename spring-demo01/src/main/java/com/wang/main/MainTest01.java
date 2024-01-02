@@ -2,6 +2,7 @@ package com.wang.main;
 
 import com.wang.config.DataSource;
 import com.wang.config.ParentDataSource;
+import com.wang.dao.AccountDaoTwo;
 import com.wang.dao.StoreDao;
 import com.wang.service.*;
 import com.wang.service.bean.BeanOne;
@@ -179,6 +180,9 @@ public class MainTest01 {
         bean.isNull();
     }
 
+    /**
+     * depends-on
+     */
     public static void test14() {
         ApplicationContext context = new ClassPathXmlApplicationContext("services.xml");
         LOGGER.info("test14 start");
@@ -186,8 +190,21 @@ public class MainTest01 {
         bean.exampleBean02();
     }
 
+    /**
+     * 懒加载
+     * 通过懒加载阻止单例bean的预实例化，非启动时初始化;
+     * 当bean之间有依赖关系时懒加载失效;
+     * 开启debug观察日志
+     */
+    public static void test15() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("services.xml");
+        LOGGER.info("test15 start");
+        AccountDaoTwo bean = context.getBean(AccountDaoTwo.class);
+        bean.accountDaoTwo();
+    }
+
     public static void main(String[] args) {
-        test14();
+        test15();
     }
 
 }

@@ -166,11 +166,18 @@
     <!--depends-on的使用,强制bean初始化之前必须初始相关的依赖bean-->
     <bean id="exampleBean02" class="com.wang.service.bean.ExampleBean02" depends-on="manager,accountDao1">
         <property name="manageDao" ref="manager" />
-        <!--<property name="accountDao" ref="accountDao1" />-->
+        <property name="accountDao" ref="accountDao1" />
     </bean>
 
     <bean id="manager" class="com.wang.dao.ManageDao" />
-    <bean id="accountDao1" class="com.wang.dao.AccountDao" />
+    <bean id="accountDao1" class="com.wang.dao.AccountDao"/>
+
+    <!--懒加载-->
+    <bean id="accountDaoTwo" class="com.wang.dao.AccountDaoTwo" lazy-init="true"/>
+    <!--<beans default-lazy-init="true">-->
+    <!--    &lt;!&ndash; no beans will be pre-instantiated... &ndash;&gt;-->
+    <!--</beans>-->
+
 
 
     <!--xml导入-->
